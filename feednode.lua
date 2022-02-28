@@ -15,7 +15,7 @@ local update = function (pos, elapsed)
             -- Process special things
             if open == 0 and pname == owner then
                 -- Only U (owner only)
-                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feeding"), obj, obj:get_pos())
                 if food_mod ~= nil then
                     if food_mod.change_saturation ~= nil then
                         food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
@@ -35,7 +35,7 @@ local update = function (pos, elapsed)
                     end
                 end
                 if found == true or pname == owner then
-                    minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                    minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feeding"), obj, obj:get_pos())
                     if food_mod ~= nil then
                         if food_mod.change_saturation ~= nil then
                             food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
@@ -47,7 +47,7 @@ local update = function (pos, elapsed)
                 end
             else
                 -- Public (everyone)
-                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feeding"), obj, obj:get_pos())
                 if food_mod ~= nil then
                     if food_mod.change_saturation ~= nil then
                         food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)

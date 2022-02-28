@@ -15,3 +15,11 @@ end
 if medblocks.hunger_installed == false and minetest.get_modpath("hbhunger") then
     medblocks.hunger_installed = true
 end
+
+if medblocks.hunger_installed == true then
+    minetest.register_craftitem("medblocks:feeding", {
+        description = "Feeding",
+        inventory_image = "medblocks_redplus2.png"
+    })
+end
+

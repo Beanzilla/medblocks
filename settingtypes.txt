@@ -1,0 +1,13 @@
+
+# Allow crafting the Mednode & Medpack
+medblocks.allow_crafting (Allow Crafting) bool false
+
+# Distance in nodes (all non-air nodes completely block healing)
+medblocks.mednode_range (Range) float 1.0 0.5 24.0
+
+# Hearts per second (default: 0.5 hearts per second, 1 HP per second)
+medblocks.mednode_healing (Healing) int 1 1 20
+
+# Hearts per second (default: 0.5 hearts per second, 1 HP per second)
+medblocks.medpack_healing (Healing) int 1 1 20
+

@@ -2,7 +2,7 @@
 medblocks = {}
 
 medblocks.MODPATH = minetest.get_modpath("medblocks")
-medblocks.VERSION = "1.1.0-dev"
+medblocks.VERSION = "1.1.0"
 medblocks.settings = {
     mednode = {
         allow_crafting = false,

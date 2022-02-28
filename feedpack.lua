@@ -10,6 +10,7 @@ minetest.register_craftitem("medblocks:feedpack", {
 local interval = 0
 minetest.register_globalstep(function (dtime)
     interval = interval - dtime
+    local food_mod = rawget(_G, "stamina")
     if interval <= 0 then
         -- Ok, 3 seconds are up, let's check players for medpacks and add up their total healing to apply to players
         for _, player in ipairs(minetest.get_connected_players()) do
@@ -25,7 +26,17 @@ minetest.register_globalstep(function (dtime)
                 end
                 -- Ok, assuming it's at least 1, let's add the total up
                 local feeding = medblocks.settings.feedpack.feeding * packs_found
-                minetest.do_item_eat(feeding, nil, nil, player, nil)
+                --minetest.log("action", "[medblocks] Feedpack "..player:get_player_name())
+                --minetest.do_item_eat(feeding, nil, nil, player, nil)
+                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feedpack"), player, player:get_pos())
+                if food_mod ~= nil then
+                    if food_mod.change_saturation ~= nil then
+                        food_mod.change_saturation(player:get_player_name(), feeding)
+                    end
+                    if food_mod.change ~= nil then
+                        food_mod.change(player:get_player_name(), feeding)
+                    end
+                end
                 -- Done with them, next!
             end
         end

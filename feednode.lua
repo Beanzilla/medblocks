@@ -4,16 +4,26 @@ local update = function (pos, elapsed)
     local open = meta:get_int("open")
     local owner = meta:get_string("owner")
     local names = meta:get_string("names")
+    local food_mod = rawget(_G, "stamina")
     -- Collect all entities within range
     local objs = minetest.get_objects_inside_radius(pos, medblocks.settings.feednode.range or 1.0)
     for _, obj in ipairs(objs) do
         -- Only target players
         if obj:is_player() then
             local pname = obj:get_player_name()
+            --minetest.log("action", "[medblocks] Feednode "..pname)
             -- Process special things
             if open == 0 and pname == owner then
                 -- Only U (owner only)
-                minetest.do_item_eat(medblocks.settings.feednode or 1.0, nil, nil, obj, nil)
+                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                if food_mod ~= nil then
+                    if food_mod.change_saturation ~= nil then
+                        food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                    end
+                    if food_mod.change ~= nil then
+                        food_mod.change(pname, medblocks.settings.feednode.feeding)
+                    end
+                end
             elseif open == 1 then
                 -- Members (owner & members)
                 local list = names.split(names, "\n")
@@ -25,11 +35,27 @@ local update = function (pos, elapsed)
                     end
                 end
                 if found == true or pname == owner then
-                    minetest.do_item_eat(medblocks.settings.feednode or 1.0, nil, nil, obj, nil)
+                    minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                    if food_mod ~= nil then
+                        if food_mod.change_saturation ~= nil then
+                            food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                        end
+                        if food_mod.change ~= nil then
+                            food_mod.change(pname, medblocks.settings.feednode.feeding)
+                        end
+                    end
                 end
             else
                 -- Public (everyone)
-                minetest.do_item_eat(medblocks.settings.feednode or 1.0, nil, nil, obj, nil)
+                minetest.do_item_eat(medblocks.settings.feednode.feeding or 1.0, nil, ItemStack("medblocks:feednode"), obj, obj:get_pos())
+                if food_mod ~= nil then
+                    if food_mod.change_saturation ~= nil then
+                        food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                    end
+                    if food_mod.change ~= nil then
+                        food_mod.change(pname, medblocks.settings.feednode.feeding)
+                    end
+                end
             end
         end
     end

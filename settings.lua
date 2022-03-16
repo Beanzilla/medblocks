@@ -76,3 +76,10 @@ if settings.feedpack.feeding == nil then
 else
     settings.feedpack.feeding = tonumber(settings.feedpack.feeding)
 end
+
+-- Debug
+settings.debug_mode = minetest.settings:get_bool("medblocks.debug_mode")
+if settings.debug_mode == nil then
+    settings.debug_mode = false
+    minetest.settings:set_bool("medblocks.debug_mode", settings.debug_mode)
+end

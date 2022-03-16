@@ -10,6 +10,9 @@ local update = function (pos, elapsed)
         -- Only target players
         if obj:is_player() then
             local pname = obj:get_player_name()
+            if medblocks.settings.debug_mode == true then
+                minetest.log("action", "[medblocks] Mednode "..pname)
+            end
             -- Process special things
             if open == 0 and pname == owner then
                 -- Only U (owner only)

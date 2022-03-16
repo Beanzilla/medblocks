@@ -2,7 +2,7 @@
 medblocks = {}
 
 medblocks.MODPATH = minetest.get_modpath("medblocks")
-medblocks.VERSION = "1.1.1"
+medblocks.VERSION = "1.2"
 medblocks.settings = {
     mednode = {
         allow_crafting = false,
@@ -23,8 +23,9 @@ medblocks.settings = {
         feeding = 1
     }
 }
-medblocks.hunger_installed = false
+medblocks.hunger_installed = "" -- If a mod which provides hunger is installed, we will identify which one
 
+-- Identify gamemode (Common games like MTG or MCL)
 medblocks.gamemode = "???"
 if minetest.get_modpath("default") ~= nil then
     medblocks.gamemode = "MTG"
@@ -43,7 +44,7 @@ dofile(medblocks.MODPATH .. DIR_DELIM .. "mednode.lua")
 -- Also counts recursive packs (more packs, more health per 3 seconds)
 dofile(medblocks.MODPATH .. DIR_DELIM .. "medpack.lua")
 
-if medblocks.hunger_installed == true then
+if medblocks.hunger_installed ~= "" then
     -- Register the feednode a node which feeds players (should be disabled if no hunger mod is detected)
     dofile(medblocks.MODPATH .. DIR_DELIM .. "feednode.lua")
 
@@ -58,8 +59,8 @@ dofile(medblocks.MODPATH .. DIR_DELIM .. "crafting.lua")
 -- Basic notice that we are ready
 minetest.log("action", "[medblocks] Version: " .. medblocks.VERSION)
 minetest.log("action", "[medblocks] Gamemode: " .. medblocks.gamemode)
-if medblocks.hunger_installed == true then
-    minetest.log("action", "[medblocks] Hunger Mod: Found")
+if medblocks.hunger_installed ~= "" then
+    minetest.log("action", "[medblocks] Hunger Mod: Found '"..medblocks.hunger_installed.."'")
 else
     minetest.log("action", "[medblocks] Hunger Mod: Not Found")
 end

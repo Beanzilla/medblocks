@@ -13,6 +13,7 @@ minetest.register_globalstep(function (dtime)
     if interval <= 0 then
         -- Ok, 3 seconds are up, let's check players for medpacks and add up their total healing to apply to players
         for _, player in ipairs(minetest.get_connected_players()) do
+            local pname = player:get_player_name()
             local inv = player:get_inventory()
             -- Quick check to ensure they do have a medpack (possibly more)
             if inv:contains_item("main", "medblocks:medpack") then
@@ -25,6 +26,9 @@ minetest.register_globalstep(function (dtime)
                 end
                 -- Ok, assuming it's at least 1, let's add the total up
                 local healing = medblocks.settings.medpack.healing * packs_found
+                if medblocks.settings.debug_mode == true then
+                    minetest.log("action", "[medblocks] Medpack "..pname.." x "..tostring(packs_found))
+                end
                 local hp = player:get_hp()
                 player:set_hp(hp+healing, {type="set_hp", from="mod"})
                 -- Done with them, next!

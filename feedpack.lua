@@ -44,9 +44,9 @@ minetest.register_globalstep(function (dtime)
                         food_mod.change(player:get_player_name(), feeding)
                     end
                     -- HBHunger Mod
-                    if food_mod.hunger ~= nil then
-                        local hunger = food_mod.hunger[pname]
-                        food_mod.hunger[pname] = hunger + feeding
+                    if inv:get_size("hunger") == 1 then
+                        local hunger = inv:get_stack("hunger", 1):get_count()
+                        inv:set_stack("hunger", 1, ItemStack({name=":", count=hunger+feeding+1}))
                     end
                 end
                 -- Done with them, next!

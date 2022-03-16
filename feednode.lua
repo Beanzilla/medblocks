@@ -34,8 +34,8 @@ local update = function (pos, elapsed)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        food_mod.hunger[pname] = food_mod.hunger[pname] + medblocks.settings.feednode.feeding + 1
-                        food_mod.set_hunger_raw(player)
+                        food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                        food_mod.set_hunger_raw(obj)
                     end
                 end
             elseif open == 1 then
@@ -60,8 +60,8 @@ local update = function (pos, elapsed)
                         end
                         -- HBHunger Mod
                         if food_mod.hunger ~= nil then
-                            food_mod.hunger[pname] = food_mod.hunger[pname] + medblocks.settings.feednode.feeding + 1
-                            food_mod.set_hunger_raw(player)
+                            food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                            food_mod.set_hunger_raw(obj)
                         end
                     end
                 end
@@ -78,8 +78,8 @@ local update = function (pos, elapsed)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        food_mod.hunger[pname] = food_mod.hunger[pname] + medblocks.settings.feednode.feeding + 1
-                        food_mod.set_hunger_raw(player)
+                        food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                        food_mod.set_hunger_raw(obj)
                     end
                 end
             end

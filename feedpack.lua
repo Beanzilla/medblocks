@@ -45,7 +45,7 @@ minetest.register_globalstep(function (dtime)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        food_mod.hunger[pname] = food_mod.hunger[pname] + feeding + 1
+                        food_mod.hunger[pname] = food_mod.get_hunger_raw(player) + feeding + 1
                         food_mod.set_hunger_raw(player)
                     end
                 end

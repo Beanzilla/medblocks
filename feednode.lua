@@ -27,15 +27,20 @@ local update = function (pos, elapsed)
                 if food_mod ~= nil then
                     -- Stamina Mod
                     if food_mod.change_saturation ~= nil then
-                        food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                        local at = food_mod.get_stauration()
+                        if at > 20 then
+                            food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                        end
                     end
                     if food_mod.change ~= nil then
                         food_mod.change(pname, medblocks.settings.feednode.feeding)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
-                        food_mod.set_hunger_raw(obj)
+                        if food_mod.hunger[pname] > food_mod.SAT_MAX then
+                            food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                            food_mod.set_hunger_raw(obj)
+                        end
                     end
                 end
             elseif open == 1 then
@@ -53,15 +58,20 @@ local update = function (pos, elapsed)
                     if food_mod ~= nil then
                         -- Stamina Mod
                         if food_mod.change_saturation ~= nil then
-                            food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                            local at = food_mod.get_stauration()
+                            if at > 20 then
+                                food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                            end
                         end
                         if food_mod.change ~= nil then
                             food_mod.change(pname, medblocks.settings.feednode.feeding)
                         end
                         -- HBHunger Mod
                         if food_mod.hunger ~= nil then
-                            food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
-                            food_mod.set_hunger_raw(obj)
+                            if food_mod.hunger[pname] > food_mod.SAT_MAX then
+                                food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                                food_mod.set_hunger_raw(obj)
+                            end
                         end
                     end
                 end
@@ -71,15 +81,20 @@ local update = function (pos, elapsed)
                 if food_mod ~= nil then
                     -- Stamina Mod
                     if food_mod.change_saturation ~= nil then
-                        food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                        local at = food_mod.get_stauration()
+                        if at > 20 then
+                            food_mod.change_saturation(pname, medblocks.settings.feednode.feeding)
+                        end
                     end
                     if food_mod.change ~= nil then
                         food_mod.change(pname, medblocks.settings.feednode.feeding)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
-                        food_mod.set_hunger_raw(obj)
+                        if food_mod.hunger[pname] > food_mod.SAT_MAX then
+                            food_mod.hunger[pname] = food_mod.get_hunger_raw(obj) + medblocks.settings.feednode.feeding + 1
+                            food_mod.set_hunger_raw(obj)
+                        end
                     end
                 end
             end

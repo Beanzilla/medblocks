@@ -40,7 +40,7 @@ minetest.register_globalstep(function (dtime)
                     -- Stamina Mod
                     if food_mod.change_saturation ~= nil then
                         local at = food_mod.get_staturation(pname)
-                        if at > 20 then
+                        if at < 20 then
                             food_mod.change_saturation(player:get_player_name(), feeding)
                         end
                     end
@@ -49,7 +49,7 @@ minetest.register_globalstep(function (dtime)
                     end
                     -- HBHunger Mod
                     if food_mod.hunger ~= nil then
-                        if food_mod.hunger[pname] > food_mod.SAT_MAX then
+                        if food_mod.hunger[pname] < food_mod.SAT_MAX then
                             food_mod.hunger[pname] = food_mod.get_hunger_raw(player) + feeding + 1
                             food_mod.set_hunger_raw(player)
                         end
